@@ -16,7 +16,7 @@ async def subscribe_on_astaria(worker: str, queue: asyncio.Queue) -> None:
         email = await queue.get()
 
         async with aiohttp.ClientSession() as session:
-            async with session.get(url.format(email.split(":")[0])) as resp:
+            async with session.get(url.format(email)) as resp:
                 if "Thank" in await resp.text():
                     logger.success(
                         f"{worker} - {email} successfully registered")
