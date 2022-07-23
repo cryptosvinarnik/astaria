@@ -9,7 +9,7 @@ url = "https://xyz.us11.list-manage.com/subscribe/" \
       "id=9c1bff8a37&EMAIL={}&c=__jp0"
 
 
-async def subscribe_on_solana(worker: str, queue: asyncio.Queue) -> None:
+async def subscribe_on_astaria(worker: str, queue: asyncio.Queue) -> None:
     i = 0
 
     while not queue.empty():
@@ -36,7 +36,7 @@ async def main(emails):
     for email in emails:
         queue.put_nowait(email)
 
-    tasks = [asyncio.create_task(subscribe_on_solana(
+    tasks = [asyncio.create_task(subscribe_on_astaria(
              f"Worker {i}", queue)) for i in range(5)]
 
     await asyncio.gather(*tasks)
